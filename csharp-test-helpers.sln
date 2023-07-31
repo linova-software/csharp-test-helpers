@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linova.TestHelpers", "src\Linova.TestHelpers\Linova.TestHelpers.csproj", "{A8006225-4FEF-4D77-8276-576723BA05F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linova.TestHelpers.LanguageExt.V4", "src\Linova.TestHelpers.LanguageExt.V4\Linova.TestHelpers.LanguageExt.V4.csproj", "{5D9F5E6A-D8D3-405D-B4AF-E5604E262977}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linova.TestHelpers.MediatR", "src\Linova.TestHelpers.MediatR\Linova.TestHelpers.MediatR.csproj", "{9D4C24C3-9B90-4BC5-B99F-1AF2302BDB4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linova.TestHelpers.LanguageExt.V4.Tests", "tests\Linova.TestHelpers.LanguageExt.V4.Tests\Linova.TestHelpers.LanguageExt.V4.Tests.csproj", "{74D62889-1112-490A-9058-F95E3D4D22E0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A8006225-4FEF-4D77-8276-576723BA05F1} = {A8006225-4FEF-4D77-8276-576723BA05F1}
+		{5D9F5E6A-D8D3-405D-B4AF-E5604E262977} = {5D9F5E6A-D8D3-405D-B4AF-E5604E262977}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linova.TestHelpers.MediatR.Tests", "tests\Linova.TestHelpers.MediatR.Tests\Linova.TestHelpers.MediatR.Tests.csproj", "{61D9EB51-B771-4FF3-9653-401ECA223AB1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8006225-4FEF-4D77-8276-576723BA05F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8006225-4FEF-4D77-8276-576723BA05F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8006225-4FEF-4D77-8276-576723BA05F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8006225-4FEF-4D77-8276-576723BA05F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D9F5E6A-D8D3-405D-B4AF-E5604E262977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D9F5E6A-D8D3-405D-B4AF-E5604E262977}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D9F5E6A-D8D3-405D-B4AF-E5604E262977}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D9F5E6A-D8D3-405D-B4AF-E5604E262977}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D4C24C3-9B90-4BC5-B99F-1AF2302BDB4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D4C24C3-9B90-4BC5-B99F-1AF2302BDB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D4C24C3-9B90-4BC5-B99F-1AF2302BDB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D4C24C3-9B90-4BC5-B99F-1AF2302BDB4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74D62889-1112-490A-9058-F95E3D4D22E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74D62889-1112-490A-9058-F95E3D4D22E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74D62889-1112-490A-9058-F95E3D4D22E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74D62889-1112-490A-9058-F95E3D4D22E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61D9EB51-B771-4FF3-9653-401ECA223AB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D9EB51-B771-4FF3-9653-401ECA223AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61D9EB51-B771-4FF3-9653-401ECA223AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61D9EB51-B771-4FF3-9653-401ECA223AB1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

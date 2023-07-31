@@ -1,0 +1,43 @@
+name: MediatR package
+
+on: 
+  push:
+    paths: # Important: do not put ./ in front of the path
+      - 'src/Linova.TestHelpers/**'
+      - 'src/Linova.TestHelpers.MediatR/**'
+      - 'tests/Linova.TestHelpers.MediatR.Tests/**'
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          global-json-file: ./global.json
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build project ${{vars.PROJECT_MediatR}}"
+        run: dotnet build ./src/${{vars.PROJECT_MediatR}}/${{vars.PROJECT_MediatR}}.csproj --configuration Release --no-restore
+      - name: Test project ${{vars.PROJECT_MediatR}}"
+        run: dotnet test ./tests/${{vars.PROJECT_MediatR}}.Tests/${{vars.PROJECT_MediatR}}.Tests.csproj --no-restore --verbosity normal
+
+      - name: Extract version for TestHelpers
+        uses: kzrnm/get-net-sdk-project-versions-action@v1
+        id: version-TestHelpers
+        with:
+          proj-path: src/${{vars.PROJECT_TestHelpers}}/${{vars.PROJECT_TestHelpers}}.csproj
+      - name: Extract version for MediatR
+        uses: kzrnm/get-net-sdk-project-versions-action@v1
+        id: version-MediatR
+        with:
+          proj-path: src/${{vars.PROJECT_MediatR}}/${{vars.PROJECT_MediatR}}.csproj
+      - name: Publish TestHelpers
+        run: dotnet nuget push "src/${{vars.PROJECT_TestHelpers}}/bin/Release/${{vars.PROJECT_TestHelpers}}.${{steps.version-TestHelpers.outputs.package-version}}.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+      - name: Publish MediatR
+        run: dotnet nuget push "src/${{vars.PROJECT_MediatR}}/bin/Release/${{vars.PROJECT_MediatR}}.${{steps.version-MediatR.outputs.package-version}}.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate

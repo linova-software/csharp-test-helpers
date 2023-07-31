@@ -1,0 +1,43 @@
+name: LanguageExt package
+
+on: 
+  push:
+    paths: # Important: do not put ./ in front of the path
+      - 'src/Linova.TestHelpers/**'
+      - 'src/Linova.TestHelpers.LanguageExt.V4/**'
+      - 'tests/Linova.TestHelpers.LanguageExt.V4.Tests/**'
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          global-json-file: ./global.json
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build project ${{vars.PROJECT_LanguageExt}}"
+        run: dotnet build ./src/${{vars.PROJECT_LanguageExt}}/${{vars.PROJECT_LanguageExt}}.csproj --configuration Release --no-restore
+      - name: Test project ${{vars.PROJECT_LanguageExt}}"
+        run: dotnet test ./tests/${{vars.PROJECT_LanguageExt}}.Tests/${{vars.PROJECT_LanguageExt}}.Tests.csproj --no-restore --verbosity normal
+
+      - name: Extract version for TestHelpers
+        uses: kzrnm/get-net-sdk-project-versions-action@v1
+        id: version-TestHelpers
+        with:
+          proj-path: src/${{vars.PROJECT_TestHelpers}}/${{vars.PROJECT_TestHelpers}}.csproj
+      - name: Extract version for LanguageExt
+        uses: kzrnm/get-net-sdk-project-versions-action@v1
+        id: version-LanguageExt
+        with:
+          proj-path: src/${{vars.PROJECT_LanguageExt}}/${{vars.PROJECT_LanguageExt}}.csproj
+      - name: Publish TestHelpers
+        run: dotnet nuget push "src/${{vars.PROJECT_TestHelpers}}/bin/Release/${{vars.PROJECT_TestHelpers}}.${{steps.version-TestHelpers.outputs.package-version}}.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+      - name: Publish LanguageExt
+        run: dotnet nuget push "src/${{vars.PROJECT_LanguageExt}}/bin/Release/${{vars.PROJECT_LanguageExt}}.${{steps.version-LanguageExt.outputs.package-version}}.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
